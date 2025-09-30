@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Fan Index - Cloudflare Pages</title>
+    <!-- Load Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Dark theme background */
+            min-height: 100vh; /* Ensure full viewport height */
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 text-white">
+
+    <script>
+        // Simple data structure for the list
+        const animeList = [
+            { id: 1, title: "Attack on Titans", status: "Completed", episodes: 88, thumb: "https://placehold.co/100x150/1e293b/ffffff?text=AOT" },
+            { id: 2, title: "Jujutsu Kaisen", status: "Airing", episodes: 47, thumb: "https://placehold.co/100x150/1e293b/ffffff?text=JJK" },
+            { id: 3, title: "One Piece", status: "Ongoing", episodes: 1100, thumb: "https://placehold.co/100x150/1e293b/ffffff?text=OP" },
+            // Add a few more mock entries for a better display
+            { id: 4, title: "Spy x Family", status: "Airing", episodes: 37, thumb: "https://placehold.co/100x150/1e293b/ffffff?text=S+X+F" },
+            { id: 5, title: "Frieren: Beyond Journey's End", status: "Completed", episodes: 28, thumb: "https://placehold.co/100x150/1e293b/ffffff?text=Frieren" },
+            { id: 6, title: "Demon Slayer", status: "Airing", episodes: 55, thumb: "https://placehold.co/100x150/1e293b/ffffff?text=DS" }
+        ];
+
+        // Function to render the list dynamically
+        function renderAnimeList() {
+            const container = document.getElementById('anime-container');
+            if (!container) return; // Exit if container doesn't exist
+
+            container.innerHTML = animeList.map(anime => `
+                <div class="flex flex-col bg-gray-800 p-4 rounded-xl shadow-2xl transition duration-300 ease-in-out hover:bg-gray-700 hover:shadow-teal-500/30">
+                    <!-- Thumbnail/Image Area -->
+                    <div class="relative mb-3 overflow-hidden rounded-lg">
+                        <img 
+                            src="${anime.thumb}" 
+                            alt="${anime.title} thumbnail" 
+                            onerror="this.src='https://placehold.co/200x280/1e293b/ffffff?text=No+Cover'" 
+                            class="w-full h-64 object-cover transform hover:scale-[1.02] transition duration-500"
+                        >
+                    </div>
+
+                    <!-- Details -->
+                    <h2 class="text-xl font-extrabold text-teal-400 truncate mb-1">${anime.title}</h2>
+                    <p class="text-xs text-gray-400 mb-3">${anime.status} • ${anime.episodes} episodes</p>
+                    
+                    <!-- Action Button -->
+                    <a href="#" class="mt-auto block w-full text-center px-4 py-2 text-sm font-bold tracking-wider rounded-full bg-teal-600 hover:bg-teal-500 transition shadow-md hover:shadow-lg">
+                        Watch Now (Mock)
+                    </a>
+                </div>
+            `).join('');
+        }
+        
+        // Render on page load
+        window.onload = renderAnimeList;
+    </script>
+
+    <header class="mb-12 text-center">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center">
+            <h1 class="text-5xl font-extrabold text-teal-500 mb-4 sm:mb-0 tracking-tight">
+                Anime<span class="text-white">Index</span>
+            </h1>
+            <nav>
+                <a href="#" class="text-gray-300 hover:text-teal-400 transition ml-6">Home</a>
+                <a href="#" class="text-gray-300 hover:text-teal-400 transition ml-6">New Episodes</a>
+                <a href="#" class="text-gray-300 hover:text-teal-400 transition ml-6">Genres</a>
+            </nav>
+        </div>
+        <p class="text-gray-400 mt-4 text-lg">Your static directory for anime information.</p>
+    </header>
+
+    <!-- Anime Grid Container -->
+    <main id="anime-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 max-w-7xl mx-auto pb-12"></main>
+
+    <footer class="mt-16 py-6 border-t border-gray-700 text-center text-gray-500 text-sm">
+        <p>© 2025 AnimeIndex Mockup. Hosted securely and quickly via Cloudflare Pages.</p>
+        <p class="text-xs mt-2">All data is static and mock. No actual streaming or copyrighted content is provided.</p>
+    </footer>
+
+</body>
+</html>
